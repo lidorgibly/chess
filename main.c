@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
-//#include <synchapi.h>
 
 
 
@@ -22,25 +21,68 @@ extern _piece_type board[8][8];
 
 
 
+
+
+
+
+
 int main(){
 	
+	init_board();
 	
 	//if (!is_init_state())
 	//	raise_error(NotStartingPositionAtStartup);
 
+	char move[10];
+
+//printf("move empty: %c %c %c %c", move[0], move[1], move[2], move[3]);
+
+	
+
+
+
 
 	while (true)
 	{
-		if (is_init_state())
-			init_board();
+		//if (is_init_state())
+			//init_board();
 
-		//Sleep(1000);
+		//puts("enter a move: (example: b1-c3)");
+		puts("enter a command: (example: upb2, downf5)");
+
+		gets(move);
+
+
+
+		
+		if (strstr(move, "up")){
+			_coordinates coo;
+			
+			coo.x = chess_letter_to_x_coordinate(move[2]);
+			coo.y = chess_char_to_y_coordinate(move[3]);
+			piece_up(coo);
+			
+		}
+		if (strstr(move, "down")){
+			_coordinates coo;
+			
+			coo.x = chess_letter_to_x_coordinate(move[4]);
+			coo.y = chess_char_to_y_coordinate(move[5]);
+			piece_down(coo);
+			
+		}
+		
+		
+		//http_send_move(move);
+
+
+		//is_init_state();
 		usleep(HTTP_UPDATE_TIME_US);
 
 
-		printf("send_http\n");
-		http_send_board(board);
-		printf("sent_http\n\n");
+		//printf("send_http\n");
+		//http_send_board(board);
+		//printf("sent_http\n\n");
 
 	}
 	
