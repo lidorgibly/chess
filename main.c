@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
-
+#include <string.h>
 
 
 #define HTTP_UPDATE_TIME_US 1000000	//1sec
