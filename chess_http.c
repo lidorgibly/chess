@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "curl.h"
 #include "chess.h"
+#include <string.h>
+#include "chess_http.h"
+
 
 void coordinates_to_chess_move(_coordinates origin, _coordinates destination, char move[]);
 void board_to_string(_piece_type board[8][8], char* stringBoard);
