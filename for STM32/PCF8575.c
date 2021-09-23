@@ -71,13 +71,13 @@ void write_IO(_port port, _pin pin, _bit value, _IOsDevice device){	//output mod
 	data[1] = device.IOsMirrorPort1;
 	
 	
-	if (port == Port0){
-		set_bit(value, (char)pin, &data[0])
+	if (port == PORT0){
+		set_bit(value, (char)pin, &data[0]);
 		device.IOsMirrorPort0 = data[0];
 	}
 	
-	if (port == Port1){
-		set_bit(value, (char)pin, &data[1])
+	if (port == PORT1){
+		set_bit(value, (char)pin, &data[1]);
 		device.IOsMirrorPort1 = data[1];
 	}
 	

@@ -27,10 +27,10 @@ typedef struct IOsDevice{
 } _IOsDevice;
 
 
-
-void read_IO(char *IO, _port PORT, _pin PIN, char deviceAddress);	//input mode
+void set_bit(char value, char index, char* byte);
+void read_IO(char *IO, _port PORT, _pin PIN, _IOsDevice device);	//input mode
 void write_all_IOs(_port_data port0Data, _port_data port1Data, _IOsDevice device);	//output mode
-void write_IO(_port port, _pin pin, _bit value, char deviceAddress);	//output mode
+void write_IO(_port port, _pin pin, _bit value, _IOsDevice device);	//output mode
 
 
 #endif
