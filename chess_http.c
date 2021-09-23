@@ -71,7 +71,7 @@ char piece_type_to_char(_piece_type pieceType){
 	if (pieceType == Bottom_Pawn)
 		return 'p';
 	if (pieceType == None)
-		return 0;
+		return ' ';
 }
 
 char piece_type_to_color(_piece_type pieceType){
@@ -103,7 +103,7 @@ char piece_type_to_color(_piece_type pieceType){
 
 
 	if (pieceType == None)
-		return 0;
+		return ' ';
 
 
 	
