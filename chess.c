@@ -239,8 +239,8 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 
 void show_rook_movement_LEDs(_coordinates originLocation){
 	
-	int nextCoo.x;
-	int nextCoo.y;
+	_coordinates nextCoo;
+
 
 	//up movement
 	nextCoo.x =  originLocation.x;
@@ -286,9 +286,8 @@ void show_queen_movement_LEDs(_coordinates originLocation){
 }
 void show_king_movement_LEDs(_coordinates originLocation){
 	
+	_coordinates nextCoo;
 	
-	int nextCoo.x;
-	int nextCoo.y;
 
 
 	//up movement
@@ -353,8 +352,11 @@ void show_king_movement_LEDs(_coordinates originLocation){
 }
 
 void show_top_pawn_movement_LEDs(_coordinates originLocation){
-	int nextCoo.x =  originLocation.x;
-	int nextCoo.y =  originLocation.y - 1;
+	
+	_coordinates nextCoo;
+
+	nextCoo.x =  originLocation.x;
+	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
 		LED_on_off(nextCoo, true);
@@ -363,9 +365,10 @@ void show_top_pawn_movement_LEDs(_coordinates originLocation){
 	
 }
 void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
-	
-	int nextCoo.x =  originLocation.x;
-	int nextCoo.y =  originLocation.y + 1;
+	_coordinates nextCoo;
+
+	nextCoo.x =  originLocation.x;
+	nextCoo.y =  originLocation.y + 1;
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
 		LED_on_off(nextCoo, true);
 	

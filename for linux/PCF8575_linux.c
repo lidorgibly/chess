@@ -26,7 +26,7 @@ void read_IO(char *IO, _port PORT, _pin PIN, _IOsDevice device){		//input mode
 	
 	char data[2];
 	
-	set_i2c_slave_address((int)device.address);
+	set_i2c_slave_address(device.address);
 	
 	i2c_read(data, 2);
 	
@@ -51,7 +51,7 @@ void write_all_IOs(_port_data port0Data, _port_data port1Data, _IOsDevice device
 	data[0] = port0Data;
 	data[1] = port1Data;
 	
-	set_i2c_slave_address((int)device.address);
+	set_i2c_slave_address(device.address);
 
 	//write 2 bytes I2C_ADDRESS_WRITE
 	i2c_write(data, 2);
