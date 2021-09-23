@@ -4,7 +4,7 @@
 #include <sys/fcntl.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
-
+#include "i2c_linux.h"
 
 	int i2cFile;
 	int adapterNum = 1; 	

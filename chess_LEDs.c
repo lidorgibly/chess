@@ -1,5 +1,5 @@
 #include "chess.h"
-
+#include "chess_LEDs.h"
 #ifdef LINUX
 #include "PCF8575_linux.h"
 #else

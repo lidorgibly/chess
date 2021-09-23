@@ -383,7 +383,7 @@ void show_permitted_locations(_coordinates coo){
 	if (pieceType == Bottom_Rook || Top_Rook)
 		show_rook_movement_LEDs(coo);
 	if (pieceType == Bottom_Knight || Top_Knight)
-		show_knight_movement_LEDs(coo);
+		//show_knight_movement_LEDs(coo);
 	if (pieceType == Bottom_Bishop || Top_Bishop)
 		show_bishop_movement_LEDs(coo);
 	if (pieceType == Bottom_Queen || Top_Queen)
