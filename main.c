@@ -50,7 +50,7 @@ int main(){
 		//fputs("enter a move: (example: b1-c3)");
 		puts("enter a command: (example: upb2, downf5)");
 
-		fgets(move);
+		fgets(move, 10,stdin);	
 
 
 
