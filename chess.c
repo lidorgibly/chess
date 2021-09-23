@@ -351,6 +351,56 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	
 }
 
+void show_knight_movement_LEDs(_coordinates originLocation){
+	_coordinates nextCoo;
+	
+	nextCoo.x =  originLocation.x + 2;
+	nextCoo.y =  originLocation.y - 1;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	
+	nextCoo.x =  originLocation.x + 2;
+	nextCoo.y =  originLocation.y + 1;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	
+	nextCoo.x =  originLocation.x + 1;
+	nextCoo.y =  originLocation.y - 2;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	
+	nextCoo.x =  originLocation.x + 1;
+	nextCoo.y =  originLocation.y + 2;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	
+	nextCoo.x =  originLocation.x - 2;
+	nextCoo.y =  originLocation.y + 1;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	nextCoo.x =  originLocation.x - 2;
+	nextCoo.y =  originLocation.y - 1;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	
+	nextCoo.x =  originLocation.x - 1;
+	nextCoo.y =  originLocation.y + 2;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+	nextCoo.x =  originLocation.x - 1;
+	nextCoo.y =  originLocation.y - 2;
+	
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+		LED_on_off(nextCoo, true);
+}
+
 void show_top_pawn_movement_LEDs(_coordinates originLocation){
 	
 	_coordinates nextCoo;
@@ -383,7 +433,7 @@ void show_permitted_locations(_coordinates coo){
 	if (pieceType == Bottom_Rook || Top_Rook)
 		show_rook_movement_LEDs(coo);
 	if (pieceType == Bottom_Knight || Top_Knight)
-		//show_knight_movement_LEDs(coo);
+		show_knight_movement_LEDs(coo);
 	if (pieceType == Bottom_Bishop || Top_Bishop)
 		show_bishop_movement_LEDs(coo);
 	if (pieceType == Bottom_Queen || Top_Queen)

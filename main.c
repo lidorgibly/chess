@@ -73,16 +73,10 @@ int main(){
 		}
 		
 		
-		//http_send_move(move);
 
-
-		//is_init_state();
 		usleep(HTTP_UPDATE_TIME_US);
 
 
-		//printf("send_http\n");
-		//http_send_board(board);
-		//printf("sent_http\n\n");
 
 	}
 	

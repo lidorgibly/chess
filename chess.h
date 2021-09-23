@@ -24,29 +24,34 @@ void coordinates_to_chess_move(_coordinates origin, _coordinates destination, ch
 void print_board(_piece_type board[8][8]);
 //x = 0 to 7
 char chess_x_coordinate_to_letter(int x);
-
 //y = 0 to 7
 char chess_y_coordinate_to_char(int y);
-
 //letter = 'a' to  'h'
 int chess_letter_to_x_coordinate(char letter);
-
 //yChar = 1 to 8
 int chess_char_to_y_coordinate(char yChar);
+
 
 void make_move(_coordinates origin, _coordinates destination);
 
 bool is_same_location(_coordinates c1, _coordinates c2);
-
 bool is_init_state();
+
 void init_board();
 
 
-void check_board_state();
+//void check_board_state();
 
 void piece_down(_coordinates coo);
 void piece_up(_coordinates coo);
 
-
+void show_bishop_movement_LEDs(_coordinates originLocation);
+void show_rook_movement_LEDs(_coordinates originLocation);
+void show_queen_movement_LEDs(_coordinates originLocation);
+void show_king_movement_LEDs(_coordinates originLocation);
+void show_knight_movement_LEDs(_coordinates originLocation);
+void show_top_pawn_movement_LEDs(_coordinates originLocation);
+void show_bottom_pawn_movement_LEDs(_coordinates originLocation);
+void show_permitted_locations(_coordinates coo);
 
 #endif
