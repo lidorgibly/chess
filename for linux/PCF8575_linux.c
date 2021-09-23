@@ -45,7 +45,7 @@ void read_IO(char *IO, _port PORT, _pin PIN, _IOsDevice device){		//input mode
 //port0 - pins 7 to 0
 //port1 - pins 7 to 0
 
-void write_all_IOs(0, 0, _IOsDevice device){	//output mode
+void write_all_IOs(_port_data port0Data, _port_data port1Data, _IOsDevice device){	//output mode
 	
 	char data[2];
 	data[0] = port0Data;
@@ -83,7 +83,7 @@ void write_IO(_port port, _pin pin, _bit value, _IOsDevice device){	//output mod
 	}
 	
 	
-	write_all_IOs(data[0], data[1]);
+	write_all_IOs(data[0], data[1], device);
 
 	
 	
