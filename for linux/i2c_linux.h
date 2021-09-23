@@ -1,5 +1,5 @@
-#ifndef _PCF8575_H
-#define _PCF8575_H
+#ifndef _I2C_LINUX_H
+#define _I2C_LINUX_H
 
 
 
