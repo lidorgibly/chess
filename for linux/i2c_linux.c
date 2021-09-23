@@ -1,3 +1,11 @@
+#include <linux/i2c-dev.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/fcntl.h>
+#include <sys/ioctl.h>
+#include <stdio.h>
+
+
 	int i2cFile;
 	int adapterNum = 1; 	
 	char fileName[20];
