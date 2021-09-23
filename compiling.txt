@@ -1,1 +1,1 @@
-gcc -oChess main.c chess.c chess_http.c chess_error.c chess_LEDs.c  -IC:\curl-7.78.0-win64-mingw\include -LC:\curl-7.78.0-win64-mingw\lib -lcurl
+gcc -oChess main.c chess.c chess_http.c chess_error.c chess_LEDs.c  -IC:\curl-7.79.1-win64-mingw\include -LC:\curl-7.79.1-win64-mingw\lib -lcurl

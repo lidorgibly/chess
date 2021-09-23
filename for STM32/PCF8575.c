@@ -82,7 +82,7 @@ void write_IO(_port port, _pin pin, _bit value, _IOsDevice device){	//output mod
 	}
 	
 	
-	write_IOs(data[0], data[1], device);
+	write_all_IOs(data[0], data[1], device);
 
 	
 	
