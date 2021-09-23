@@ -362,7 +362,7 @@ void show_top_pawn_movement_LEDs(_coordinates originLocation){
 	
 	
 }
-void show_bottom_pawn_movement_LEDs(_coordinates originLocatiosn){
+void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
 	
 	int nextCoo.x =  originLocation.x;
 	int nextCoo.y =  originLocation.y + 1;
