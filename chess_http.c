@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "curl.h"
+#include "curl/curl.h"
 #include "chess.h"
 #include <string.h>
 #include "chess_http.h"
