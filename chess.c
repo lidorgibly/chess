@@ -6,6 +6,7 @@
 #include "chess_LEDs.h"
 
 
+
 _piece_type board[8][8];
 
 
@@ -18,7 +19,19 @@ _piece firstUp;
 _piece secondUp;
 _piece thirdUp;
 
-_coordinates coo;
+
+
+
+void show_bishop_movement_LEDs(_coordinates originLocation);
+void show_rook_movement_LEDs(_coordinates originLocation);
+void show_queen_movement_LEDs(_coordinates originLocation);
+void show_king_movement_LEDs(_coordinates originLocation);
+void show_knight_movement_LEDs(_coordinates originLocation);
+void show_top_pawn_movement_LEDs(_coordinates originLocation);
+void show_bottom_pawn_movement_LEDs(_coordinates originLocation);
+void show_permitted_locations(_coordinates coo);
+
+
 
 
 
@@ -459,20 +472,14 @@ void make_move(_coordinates origin, _coordinates destination){
 	board[origin.x][origin.y] = None;
 
 	
-	char move[6];
-	coordinates_to_chess_move(origin, destination, move);
-	http_send_move(move);
+	
+	
+	http_send_move(origin, destination);
 	
 	
 	print_board(board);
 }
 
-void coordinates_to_chess_move(_coordinates origin, _coordinates destination, char move[]){
-	
-	sprintf(move,"%c%c-%c%c", chess_x_coordinate_to_letter(origin.x), chess_y_coordinate_to_char(origin.y), chess_x_coordinate_to_letter(destination.x), chess_y_coordinate_to_char(destination.y));
-
-	
-}
 
 //x = 0 to 7
 char chess_x_coordinate_to_letter(int x){
@@ -488,7 +495,6 @@ char chess_y_coordinate_to_char(int y){
 }
 
 
-
 int chess_letter_to_x_coordinate(char letter){
 	return (int)letter-97;
 
@@ -501,6 +507,71 @@ int chess_char_to_y_coordinate(char yChar){
 
 
 
+char piece_type_to_char(_piece_type pieceType){
+	if (pieceType == Top_King)
+		return 'k';
+	if (pieceType == Top_Queen)
+		return 'q';
+	if (pieceType == Top_Bishop)
+		return 'b';
+	if (pieceType == Top_Rook)
+		return 'r';
+	if (pieceType == Top_Knight)
+		return 'n';
+	if (pieceType == Top_Pawn)
+		return 'p';
+	
+	if (pieceType == Bottom_King)
+		return 'k';
+	if (pieceType == Bottom_Queen)
+		return 'q';
+	if (pieceType == Bottom_Bishop)
+		return 'b';
+	if (pieceType == Bottom_Rook)
+		return 'r';
+	if (pieceType == Bottom_Knight)
+		return 'n';
+	if (pieceType == Bottom_Pawn)
+		return 'p';
+	if (pieceType == None)
+		return ' ';
+}
+
+char piece_type_to_color(_piece_type pieceType){
+	if (pieceType == Top_King)
+		return 'b';
+	if (pieceType == Top_Queen)
+		return 'b';
+	if (pieceType == Top_Bishop)
+		return 'b';
+	if (pieceType == Top_Rook)
+		return 'b';
+	if (pieceType == Top_Knight)
+		return 'b';
+	if (pieceType == Top_Pawn)
+		return 'b';
+	
+	if (pieceType == Bottom_King)
+		return 'w';
+	if (pieceType == Bottom_Queen)
+		return 'w';
+	if (pieceType == Bottom_Bishop)
+		return 'w';
+	if (pieceType == Bottom_Rook)
+		return 'w';
+	if (pieceType == Bottom_Knight)
+		return 'w';
+	if (pieceType == Bottom_Pawn)
+		return 'w';
+
+
+	if (pieceType == None)
+		return ' ';
+
+
+	
+
+}
 
 void print_board(_piece_type board[8][8]){
 	

@@ -9,6 +9,9 @@ void coordinates_to_chess_move(_coordinates origin, _coordinates destination, ch
 void board_to_string(_piece_type board[8][8], char* stringBoard);
 
 
+
+
+
 char stringBoard[3000];
 
 //stringBoard must be 65 chars- last one will be null
@@ -44,71 +47,7 @@ void board_to_string(_piece_type board[8][8], char* stringBoard){
 	strcat(stringBoard, "]}");
 }	
  
-char piece_type_to_char(_piece_type pieceType){
-	if (pieceType == Top_King)
-		return 'k';
-	if (pieceType == Top_Queen)
-		return 'q';
-	if (pieceType == Top_Bishop)
-		return 'b';
-	if (pieceType == Top_Rook)
-		return 'r';
-	if (pieceType == Top_Knight)
-		return 'n';
-	if (pieceType == Top_Pawn)
-		return 'p';
-	
-	if (pieceType == Bottom_King)
-		return 'k';
-	if (pieceType == Bottom_Queen)
-		return 'q';
-	if (pieceType == Bottom_Bishop)
-		return 'b';
-	if (pieceType == Bottom_Rook)
-		return 'r';
-	if (pieceType == Bottom_Knight)
-		return 'n';
-	if (pieceType == Bottom_Pawn)
-		return 'p';
-	if (pieceType == None)
-		return ' ';
-}
 
-char piece_type_to_color(_piece_type pieceType){
-	if (pieceType == Top_King)
-		return 'b';
-	if (pieceType == Top_Queen)
-		return 'b';
-	if (pieceType == Top_Bishop)
-		return 'b';
-	if (pieceType == Top_Rook)
-		return 'b';
-	if (pieceType == Top_Knight)
-		return 'b';
-	if (pieceType == Top_Pawn)
-		return 'b';
-	
-	if (pieceType == Bottom_King)
-		return 'w';
-	if (pieceType == Bottom_Queen)
-		return 'w';
-	if (pieceType == Bottom_Bishop)
-		return 'w';
-	if (pieceType == Bottom_Rook)
-		return 'w';
-	if (pieceType == Bottom_Knight)
-		return 'w';
-	if (pieceType == Bottom_Pawn)
-		return 'w';
-
-
-	if (pieceType == None)
-		return ' ';
-
-
-	
-
-}
 
 
 void http_get(char* url)
@@ -200,11 +139,21 @@ void http_send_move(_coordinates origin, _coordinates destination){
 
 
 
-void http_send_move(char move[]){
+void coordinates_to_chess_move(_coordinates origin, _coordinates destination, char move[]){
+	
+	sprintf(move,"%c%c-%c%c", chess_x_coordinate_to_letter(origin.x), chess_y_coordinate_to_char(origin.y), chess_x_coordinate_to_letter(destination.x), chess_y_coordinate_to_char(destination.y));
+
+	
+}
+
+
+void http_send_move(_coordinates origin, _coordinates destination){
 	
 	
+	char move[6];
+	coordinates_to_chess_move(origin, destination, move);
 	
-	char url[50] = "http://127.0.0.1:3000/chess?move=";
+	char url[50] = WEB_URL;
 	
 	strcat(url, move);
 	printf("sending move: %s by http\n", move);

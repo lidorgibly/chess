@@ -13,11 +13,9 @@
 
 
 
-
 extern bool LED_Board[8][8];
 
 extern _piece_type board[8][8];
-
 
 
 
@@ -81,3 +79,6 @@ int main(){
 	}
 	
 }
+
+
+
