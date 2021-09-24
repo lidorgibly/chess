@@ -30,7 +30,7 @@ int main(){
 	
 	//if (!is_init_state())
 	//	raise_error(NotStartingPositionAtStartup);
-
+	print_board(board);
 	char move[10];
 
 //printf("move empty: %c %c %c %c", move[0], move[1], move[2], move[3]);

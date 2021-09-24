@@ -96,6 +96,10 @@ bool is_init_state(){
 
 void piece_up(_coordinates coo){
 	
+	
+	show_permitted_locations(coo);
+	print_board(board);
+	
 	if (firstUp.pieceType==None){
 		
 		firstUp.pieceType = board[coo.x][coo.y];
@@ -134,6 +138,8 @@ void piece_up(_coordinates coo){
 
 void piece_down(_coordinates coo){
 	
+	LED_off_all();
+
 	
 	if (firstUp.pieceType==None){	//maybe the players got up 2 pieces and got them down
 		
@@ -147,10 +153,7 @@ void piece_down(_coordinates coo){
 		
 		printf("secondUp None\n");
 		make_move(firstUp.originLocation, coo);
-		
-
 		firstUp.pieceType = None;
-		
 	
 	}else if (thirdUp.pieceType==None){		//maybe piece eated another piece
 			printf("thirdUp None\n");
@@ -159,7 +162,9 @@ void piece_down(_coordinates coo){
 			
 														//first eat second
 			make_move(firstUp.originLocation, coo);
-
+			
+			
+			
 			lastEaten = secondUp;
 			lastEat = firstUp;
 		}else if (is_same_location(coo, firstUp.originLocation)){		
@@ -206,9 +211,9 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y + 1;
 	
 	while ((is_in_board(nextCoo.x, nextCoo.y)) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x + 1;
-		nextCoo.y =  originLocation.y + 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x + 1;
+		nextCoo.y =  nextCoo.y + 1;
 	}
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
@@ -216,9 +221,9 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 
 
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x - 1 ;
-		nextCoo.y =  originLocation.y + 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x - 1 ;
+		nextCoo.y =  nextCoo.y + 1;
 	}
 	
 	//down right movement
@@ -226,9 +231,9 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x + 1;
-		nextCoo.y =  originLocation.y - 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x + 1;
+		nextCoo.y =  nextCoo.y - 1;
 	}
 	
 	//down left movement
@@ -237,9 +242,9 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x - 1 ;
-		nextCoo.y =  originLocation.y - 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x - 1 ;
+		nextCoo.y =  nextCoo.y - 1;
 	}
 	
 	
@@ -260,16 +265,16 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y + 1;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.y =  originLocation.y + 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.y =  nextCoo.y + 1;
 	}
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
 	nextCoo.y =  originLocation.y;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x + 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x + 1;
 	}
 	
 	//down movement
@@ -277,8 +282,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.y =  originLocation.y - 1;
+		LED_on_off(nextCoo, ON);
+		nextCoo.y =  nextCoo.y - 1;
 	}
 	
 	//left movement
@@ -287,8 +292,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y;
 	
 	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
-		LED_on_off(nextCoo, true);
-		nextCoo.x =  originLocation.x - 1 ;
+		LED_on_off(nextCoo, ON);
+		nextCoo.x =  nextCoo.x - 1 ;
 	}
 	
 }
@@ -308,20 +313,20 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y + 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
 	nextCoo.y =  originLocation.y;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	//down movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	//left movement
 	
@@ -329,7 +334,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 
 
 	//up right movement
@@ -337,20 +342,20 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y + 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y + 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	//down right movement
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	//down left movement
 	
@@ -358,7 +363,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	
 	
@@ -371,47 +376,47 @@ void show_knight_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 2;
 	nextCoo.y =  originLocation.y + 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 2;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 2;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y + 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y + 2;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y - 2;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 }
 
 void show_top_pawn_movement_LEDs(_coordinates originLocation){
@@ -422,7 +427,7 @@ void show_top_pawn_movement_LEDs(_coordinates originLocation){
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 
 	
 	
@@ -433,7 +438,7 @@ void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y + 1;
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
-		LED_on_off(nextCoo, true);
+		LED_on_off(nextCoo, ON);
 	
 }
 
@@ -443,15 +448,15 @@ void show_permitted_locations(_coordinates coo){
 	
 	_piece_type pieceType = board[coo.x][coo.y];
 	
-	if (pieceType == Bottom_Rook || Top_Rook)
+	if ((pieceType == Bottom_Rook) || (pieceType == Top_Rook))
 		show_rook_movement_LEDs(coo);
-	if (pieceType == Bottom_Knight || Top_Knight)
+	if ((pieceType == Bottom_Knight) || (pieceType == Top_Knight))
 		show_knight_movement_LEDs(coo);
-	if (pieceType == Bottom_Bishop || Top_Bishop)
+	if ((pieceType == Bottom_Bishop) || (pieceType == Top_Bishop))
 		show_bishop_movement_LEDs(coo);
-	if (pieceType == Bottom_Queen || Top_Queen)
+	if ((pieceType == Bottom_Queen) || (pieceType == Top_Queen))
 		show_queen_movement_LEDs(coo);
-	if (pieceType == Bottom_King || Top_King)
+	if ((pieceType == Bottom_King) || (pieceType == Top_King))
 		show_king_movement_LEDs(coo);
 	
 	if (pieceType == Bottom_Pawn)
@@ -468,13 +473,16 @@ void show_permitted_locations(_coordinates coo){
 
 void make_move(_coordinates origin, _coordinates destination){
 	
+	
+	
 	board[destination.x][destination.y] = board[origin.x][origin.y];
-	board[origin.x][origin.y] = None;
+	if ((origin.x != destination.x) || (origin.y != destination.y))
+		board[origin.x][origin.y] = None;
 
 	
 	
 	
-	http_send_move(origin, destination);
+	//http_send_move(origin, destination);
 	
 	
 	print_board(board);
@@ -508,6 +516,10 @@ int chess_char_to_y_coordinate(char yChar){
 
 
 char piece_type_to_char(_piece_type pieceType){
+	if (pieceType == -1)
+		return 'L';
+	
+	
 	if (pieceType == Top_King)
 		return 'k';
 	if (pieceType == Top_Queen)
@@ -538,6 +550,11 @@ char piece_type_to_char(_piece_type pieceType){
 }
 
 char piece_type_to_color(_piece_type pieceType){
+	
+	if (pieceType == -1)
+		return ' ';
+	
+	
 	if (pieceType == Top_King)
 		return 'b';
 	if (pieceType == Top_Queen)
@@ -574,16 +591,25 @@ char piece_type_to_color(_piece_type pieceType){
 }
 
 void print_board(_piece_type board[8][8]){
+	printf("\n      a       b       c       d       e       f       g       h\n\n");
 	
 	for (int y=7;y>=0;y--){
 		for (int x=0;x<8;x++){
 			
-			printf("| %c-%c | ", piece_type_to_char(board[x][y]), piece_type_to_color(board[x][y]));
+			if (x==0)
+				printf("%d  | %c-%c | ", y+1, piece_type_to_char(board[x][y]), piece_type_to_color(board[x][y]));
+			else if (x==7)
+				printf("| %c-%c |  %d", piece_type_to_char(board[x][y]), piece_type_to_color(board[x][y]), y+1);
+			else
+				printf("| %c-%c | ", piece_type_to_char(board[x][y]), piece_type_to_color(board[x][y]));
 			
 			
 		}
-		printf("\n");
+		printf("\n\n");
 	}
+	
+	printf("      a       b       c       d       e       f       g       h\n\n");
+	
 }
 
 

@@ -7,7 +7,6 @@
 #endif
 
 
-typedef enum {ON, OFF} _LED_state;
 
 _LED_state LED_Board[8][8];
 
@@ -38,9 +37,14 @@ void init_LEDs(){
 //} _LED;
 
 
-void LED_on_off(_coordinates coo, bool on_off){
+void LED_on_off(_coordinates coo, _LED_state on_off){
 	
 	_IOsDevice device;
+	
+	//////////////////////////
+	board[coo.x][coo.y] = -1;
+	////////////////////////////
+	
 	
 	
 	_port port;
@@ -107,6 +111,17 @@ void LED_on_off(_coordinates coo, bool on_off){
 
 
 void LED_off_all(){
+	
+	
+	
+	for (int y=7;y>=0;y--){
+		for (int x=0;x<8;x++){
+			
+			if (board[x][y] == -1)
+				board[x][y] = None;
+		}
+		
+	}
 	
 	
 	//TODO
