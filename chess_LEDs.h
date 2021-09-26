@@ -5,7 +5,7 @@ typedef enum {ON, OFF} _LED_state;
 
 
 void show_permitted_locations(_coordinates coo);
-
+void init_LEDs();
 void LED_on_off(_coordinates coo, _LED_state on_off);
 void LED_off_all();
 

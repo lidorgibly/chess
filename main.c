@@ -1,15 +1,15 @@
 #include "chess.h"
 #include "chess_error.h"
-
+#include "chess_LEDs.h"
 #include "chess_http.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
-
+#ifdef LINUX
+#include "i2c_linux.h"
+#endif
 #define HTTP_UPDATE_TIME_US 1000000	//1sec
-
 
 
 
@@ -25,9 +25,9 @@ extern _piece_type board[8][8];
 
 
 int main(){
-	
+	init_i2c();
 	init_board();
-	
+	init_LEDs();	
 	//if (!is_init_state())
 	//	raise_error(NotStartingPositionAtStartup);
 	print_board(board);

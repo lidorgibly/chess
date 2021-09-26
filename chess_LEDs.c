@@ -21,13 +21,13 @@ _IOsDevice device3;
 
 void init_LEDs(){
 	device0.address = I2C_DEVICE0_ADDRESS;
-	write_all_IOs(0, 0, device0);
-	device1.address = I2C_DEVICE1_ADDRESS;
-	write_all_IOs(0, 0, device1);
-	device2.address = I2C_DEVICE2_ADDRESS;
-	write_all_IOs(0, 0, device2);
-	device3.address = I2C_DEVICE3_ADDRESS;
-	write_all_IOs(0, 0, device3);
+	LED_off_all();
+	//device1.address = I2C_DEVICE1_ADDRESS;
+	//write_all_IOs(0, 0, device1);
+	//device2.address = I2C_DEVICE2_ADDRESS;
+	//write_all_IOs(0, 0, device2);
+	//device3.address = I2C_DEVICE3_ADDRESS;
+	//write_all_IOs(0, 0, device3);
 
 	
 }
@@ -39,7 +39,7 @@ void init_LEDs(){
 
 void LED_on_off(_coordinates coo, _LED_state on_off){
 	
-	_IOsDevice device;
+	_IOsDevice* device;
 	
 	//////////////////////////
 	board[coo.x][coo.y] = -1;
@@ -52,51 +52,51 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	_bit bit;
 	
 	
-	if (on_off==1){
+	if (on_off==ON){
 		//TODO
-		//bit = ;
+		bit = 0;
 			
 	}else{
 		//TODO
-		//bit = ;
+		bit = 1;
 	}
 	
 	if (coo.y==0){	//device0 port0
-		device = device0;
+		device = &device0;
 		port = PORT0;		
 	}
 	if (coo.y==1){	//device0 port1
-		device = device0;
+		device = &device0;
 		port = PORT1;		
 		
 	}
 	if (coo.y==2){	//device1 port0
-		device = device1;
+		device = &device1;
 		port = PORT0;		
 		
 	}
 	if (coo.y==3){	//device1 port1
-		device = device1;
+		device = &device1;
 		port = PORT1;		
 
 	}
 	if (coo.y==4){	//device2 port0
-		device = device2;
+		device = &device2;
 		port = PORT0;		
 
 	}
 	if (coo.y==5){	//device2 port1
-		device = device2;
+		device = &device2;
 		port = PORT1;		
 
 	}
 	if (coo.y==6){	//device3 port0
-		device = device3;
+		device = &device3;
 		port = PORT0;		
 
 	}
 	if (coo.y==7){	//device3 port1
-		device = device3;
+		device = &device3;
 		port = PORT1;		
 
 	}
@@ -124,14 +124,14 @@ void LED_off_all(){
 	}
 	
 	
-	//TODO
-	//write_all_IOs( 0xff or 0x00,  0xff or 0x00, device0);
-	//TODO
-	//write_all_IOs( 0xff or 0x00,  0xff or 0x00, device1);
-	//TODO
-	//write_all_IOs( 0xff or 0x00,  0xff or 0x00, device2);
-	//TODO
-	//write_all_IOs( 0xff or 0x00,  0xff or 0x00, device3);
+	
+	write_all_IOs( 0xff,  0xff, &device0);
+	
+	write_all_IOs( 0xff,  0xff, &device1);
+	
+	write_all_IOs( 0xff,  0xff, &device2);
+
+	write_all_IOs( 0xff,  0xff, &device3);
 	
 }
 
