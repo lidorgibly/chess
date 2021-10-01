@@ -127,11 +127,11 @@ void LED_off_all(){
 	
 	write_all_IOs( 0xff,  0xff, &device0);
 	
-	write_all_IOs( 0xff,  0xff, &device1);
+	//write_all_IOs( 0xff,  0xff, &device1);
 	
-	write_all_IOs( 0xff,  0xff, &device2);
+	//write_all_IOs( 0xff,  0xff, &device2);
 
-	write_all_IOs( 0xff,  0xff, &device3);
+	//write_all_IOs( 0xff,  0xff, &device3);
 	
 }
 
