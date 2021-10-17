@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "chess.h"
 #include "chess_LEDs.h"
 #ifdef LINUX
@@ -20,7 +21,7 @@ _IOsDevice device3;
 
 
 void init_LEDs(){
-	device0.address = I2C_DEVICE0_ADDRESS;
+	device0.address = I2C_DEVICE4_ADDRESS;
 	LED_off_all();
 	//device1.address = I2C_DEVICE1_ADDRESS;
 	//write_all_IOs(0, 0, device1);
@@ -42,7 +43,7 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	_IOsDevice* device;
 	
 	//////////////////////////
-	board[coo.x][coo.y] = -1;
+	//board[coo.x][coo.y] = -1;
 	////////////////////////////
 	
 	
@@ -54,10 +55,12 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	
 	if (on_off==ON){
 		//TODO
+		printf("LED on\n");
 		bit = 0;
 			
 	}else{
 		//TODO
+		printf("LED off\n");
 		bit = 1;
 	}
 	
@@ -108,6 +111,18 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	
 }
 
+
+
+void LED_on_all(){
+
+
+	write_all_IOs( 0x00,  0x00, &device0);
+
+	
+
+
+
+}
 
 
 void LED_off_all(){

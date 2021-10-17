@@ -44,7 +44,6 @@ void read_IO(char *IO, _port PORT, _pin PIN, _IOsDevice* device){		//input mode
 void read_all_IOs(char* IOsPort0, char* IOsPort1, _IOsDevice* device){		//input mode
 	
 		
-	printf("read all IOs\n");
 	
 	char data[2];
 	
@@ -52,7 +51,8 @@ void read_all_IOs(char* IOsPort0, char* IOsPort1, _IOsDevice* device){		//input 
 	
 	i2c_read(data, 2);
 	
-	
+	printf("read all IOs %d %d\n", data[0], data[1]);
+
 	
 	
 	*IOsPort0 = data[0];
@@ -94,6 +94,7 @@ void write_IO(_port port, _pin pin, _bit value, _IOsDevice* device){	//output mo
 	
 	char data[2];
 	data[0] = device->IOsMirrorPort0;
+	printf("IOsMirror0 %d\n", data[0]);
 	data[1] = device->IOsMirrorPort1;
 	if (port == PORT0){
 		set_bit(value, (char)pin, &data[0]);
@@ -104,7 +105,7 @@ void write_IO(_port port, _pin pin, _bit value, _IOsDevice* device){	//output mo
 	if (port == PORT1){
 		set_bit(value, (char)pin, &data[1]);
 		//device->IOsMirrorPort1 = data[1];
-		printf("write %d to port %d\n", data[0], port);
+		printf("write %d to port %d\n", data[1], port);
 	}
 	
 

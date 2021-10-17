@@ -32,7 +32,7 @@ void init_i2c(){
 	
 void i2c_read(char* buf, int size){
 	if (read(i2cFile, buf, size) != size){
-		//printf("i2c_read: %s\n", strerror(errno));
+		printf("i2c_read: %s\n", strerror(errno));
 
 		/* ERROR HANDLING: i2c transaction failed */
 	}else{

@@ -20,7 +20,7 @@ _IOsDevice device7;
 
 void init_contact_sensors(){
 
-	device4.address = 0x21;
+	device4.address = 0x20;
 
 
 }

@@ -12,13 +12,14 @@
 #include "i2c_linux.h"
 #include "PCF8575_linux.h"
 #endif
-#define HTTP_UPDATE_TIME_US 1000000	//1sec
+#define HTTP_UPDATE_TIME_US 1000	//1sec
 
 
 
 extern bool LED_Board[8][8];
 
 extern _piece_type board[8][8];
+extern _IOsDevice device0;
 extern _IOsDevice device4;
 
 
@@ -43,9 +44,111 @@ int main(){
 
 	
 
+	char data0, data1;	
+	_coordinates coo;
+	coo.x = 0;
+	coo.y = 0;
 
 
+	//LED_off_all();
 
+	while(true){
+	
+		//write_all_IOs(0, 0, &device0);
+		
+		usleep(HTTP_UPDATE_TIME_US);
+
+		//LED_on_all();
+		read_all_IOs(&data0, &data1, &device4);
+		printf("data0 is %d\n", data0);	
+	
+			
+
+		if (data0 & 0x1){
+			coo.x = 0;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 0;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x2){
+			coo.x = 1;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 1;
+			LED_on_off(coo, ON);
+
+		}
+
+		if (data0 & 0x4){
+			coo.x = 2;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 2;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x8){
+			coo.x = 3;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 3;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x10){
+			coo.x = 4;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 4;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x20){
+			coo.x = 5;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 5;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x40){
+			coo.x = 6;
+			LED_on_off(coo, OFF);
+		}else{
+			coo.x = 6;
+			LED_on_off(coo, ON);
+
+
+		}
+		if (data0 & 0x80){
+			coo.x = 7;
+			LED_on_off(coo, OFF);
+		}else{
+
+			coo.x = 7;
+			LED_on_off(coo, ON);
+
+
+		}
+
+		
+	
+
+		//usleep(HTTP_UPDATE_TIME_US);
+
+	}
+	
+	
+	
+	
+	
 	while (true)
 	{
 		//if (is_init_state())
