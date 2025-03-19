@@ -44,13 +44,14 @@ void i2c_read(char* buf, int size){
 	
 }
 
-void i2c_write(char* buf, int size){
+int i2c_write(char* buf, int size){
 	
 	if (write(i2cFile, buf, size) != size) {
 		printf("i2c_write: %s\n", strerror(errno));
-	
+		return 0;
 		/* ERROR HANDLING: i2c transaction failed */
 	}
+	return 1;
 	
 }
 	

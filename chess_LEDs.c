@@ -19,16 +19,13 @@ _IOsDevice device1;
 _IOsDevice device2;
 _IOsDevice device3;
 
-
 void init_LEDs(){
-	device0.address = I2C_DEVICE4_ADDRESS;
+	device0.address = I2C_DEVICE0_ADDRESS;
+	device1.address = I2C_DEVICE1_ADDRESS;
+	device2.address = I2C_DEVICE2_ADDRESS;
+	device3.address = I2C_DEVICE3_ADDRESS;
 	LED_off_all();
-	//device1.address = I2C_DEVICE1_ADDRESS;
-	//write_all_IOs(0, 0, device1);
-	//device2.address = I2C_DEVICE2_ADDRESS;
-	//write_all_IOs(0, 0, device2);
-	//device3.address = I2C_DEVICE3_ADDRESS;
-	//write_all_IOs(0, 0, device3);
+
 
 	
 }
@@ -117,6 +114,9 @@ void LED_on_all(){
 
 
 	write_all_IOs( 0x00,  0x00, &device0);
+	write_all_IOs( 0x00,  0x00, &device1);
+	write_all_IOs( 0x00,  0x00, &device2);
+	write_all_IOs( 0x00,  0x00, &device3);
 
 	
 
@@ -128,7 +128,7 @@ void LED_on_all(){
 void LED_off_all(){
 	
 	
-	
+	/*
 	for (int y=7;y>=0;y--){
 		for (int x=0;x<8;x++){
 			
@@ -138,15 +138,15 @@ void LED_off_all(){
 		
 	}
 	
-	
+	*/
 	
 	write_all_IOs( 0xff,  0xff, &device0);
 	
-	//write_all_IOs( 0xff,  0xff, &device1);
+	write_all_IOs( 0xff,  0xff, &device1);
 	
-	//write_all_IOs( 0xff,  0xff, &device2);
+	write_all_IOs( 0xff,  0xff, &device2);
 
-	//write_all_IOs( 0xff,  0xff, &device3);
+	write_all_IOs( 0xff,  0xff, &device3);
 	
 }
 
