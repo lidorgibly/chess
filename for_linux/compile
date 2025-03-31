@@ -1,0 +1,1 @@
+gcc -pthread -oChess main.c contact_sensor.c  chess.c chess_http.c chess_error.c chess_LEDs.c for_linux/i2c_linux.c for_linux/PCF8575_linux.c -DLINUX -IC:\curl-7.78.0-win64-mingw\include\curl -Ifor_linux -LC:\curl-7.78.0-win64-mingw\lib -lcurl

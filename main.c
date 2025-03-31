@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "contact_sensor.h"
+#include <pthread.h>
 
 #ifdef LINUX
 #include "i2c_linux.h"
@@ -15,26 +16,23 @@
 
 #define HTTP_UPDATE_TIME_US 1000	//1sec
 
+void* board_sens(void* arg);
+
 
 
 extern bool LED_Board[8][8];
-
 extern _piece_type board[8][8];
-
 extern _IOsDevice device0;
 extern _IOsDevice device1;
 extern _IOsDevice device2;
 extern _IOsDevice device3;
-
 extern _IOsDevice device4;
 extern _IOsDevice device5;
 extern _IOsDevice device6;
 extern _IOsDevice device7;
 
-char data[4];
-_coordinates coo, coor;
-_IOsDevice* device;
-_port port;
+
+pthread_t boardStateThread;
 
 int main(){
 	init_i2c();
@@ -42,53 +40,40 @@ int main(){
 	init_contact_sensors();
 
 
+
 	
-	//LED_on_all();
-
-/*
-	device0.address = I2C_DEVICE0_ADDRESS;
-	device1.address = I2C_DEVICE1_ADDRESS;
-	device2.address = I2C_DEVICE2_ADDRESS;
-	device3.address = I2C_DEVICE3_ADDRESS;
-	device4.address = I2C_DEVICE4_ADDRESS;
-
- 	write_all_IOs(0x00, 0x00, &device0);	//output mode
-	write_all_IOs(0x00, 0x00, &device1);	//output mode
-	write_all_IOs(0x00, 0x00, &device2);	//output mode
-	write_all_IOs(0x00, 0x00, &device3);	//output mode
-	write_all_IOs(0x00, 0x00, &device4);	//output mode
-	fgets(data, 2,stdin);	
-	write_all_IOs(0xFF, 0xFF, &device0);	//output mode
-	write_all_IOs(0xFF, 0xFF, &device1);	//output mode
-	write_all_IOs(0xFF, 0xFF, &device2);	//output mode
-	write_all_IOs(0xFF, 0xFF, &device3);	//output mode
-	write_all_IOs(0xFF, 0xFF, &device4);	//output mode
-	*/
 	//fgets(data, 1,stdin);	
 
-	//while(true);
+
+	pthread_create(&boardStateThread, NULL, board_sens, NULL);
 
 
-	while(true){
-		/*
-		read_all_IOs(&data[0], &data[1], &device5);
-		printf("y0 is %d\n", data[0]);	
-		printf("y1 is %d\n", data[1]);	
-		
-		read_all_IOs(&data[2], &data[3], &device5);
-		printf("y2 is %d\n", data[2]);	
-		printf("y3 is %d\n", data[3]);	
-		read_all_IOs(&data[2], &data[3], &device6);
-		printf("y2 is %d\n", data[2]);	
-		printf("y3 is %d\n", data[3]);	
-		read_all_IOs(&data[2], &data[3], &device7);
-		printf("y2 is %d\n", data[2]);	
-		printf("y3 is %d\n", data[3]);	
-		*/
-		for (int k=0;k<8;k++){
+
+
+
+	pthread_join(boardStateThread, NULL);
+
+
+
+
+}
+
+
+
+	
+	
+void* board_sens(void* arg){
+	_IOsDevice* device;
+	_port port;
+	_coordinates coo;
+	while(true)
+	{
+			
+		for (int k=0;k<8;k++)
+		{
 			coo.y = k;
-
-			for (int n=0;n<8;n++){
+			for (int n=0;n<8;n++)
+			{
 				coo.x = n;
 				//LED_on_off(coo, ON);
 				//fgets(data, 2,stdin);	
@@ -135,7 +120,7 @@ int main(){
 				}
 				//read_all_IOs(data, data, device);
 				if (read_IO( port, (_pin)coo.x, device) == ZERO){
-					printf("%d, %d\n", coo.x, coo.y);
+					//printf("%d, %d\n", coo.x, coo.y);
 					
 					LED_on_off(coo, ON);
 				}else{
@@ -144,37 +129,15 @@ int main(){
 					LED_on_off(coo, OFF);
 					
 				}
-				
-				//usleep(10);
-
 			} 
 		}
-
 		//usleep(1500);
 
 	}
 
-	
-	
-	while (true)
-	{
-		
 
 
-
-		usleep(HTTP_UPDATE_TIME_US);
-
-
-
-	}
-	
 }
-
-
-
-	
-	
-	
 
 	
 

@@ -51,12 +51,12 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	
 	if (on_off==ON){
 		//TODO
-		printf("LED on\n");
+		//printf("LED on\n");
 		bit = 0;
 			
 	}else{
 		//TODO
-		printf("LED off\n");
+		//printf("LED off\n");
 		bit = 1;
 	}
 	
