@@ -24,19 +24,24 @@ _bit read_IO(_port port, _pin pin, _IOsDevice* device){		//input mode
 	
 	set_i2c_slave_address(device->address);
 	
-	i2c_read(data, 2);
-	
+	if (i2c_read(data, 2) == false) {
+		printf("I2C error address: %d\n", device->address);
+
+	}
 	if (port == PORT0){
+				//printf("read %d from port %d\n", data[0], port);
+
 		return read_bit((char)pin, &data[0]);
-		//printf("read %d from port %d\n", data[0], port);
 	}
 	
 	if (port == PORT1){
+				//printf("read %d from port %d\n", data[1], port);
+
 		return read_bit((char)pin, &data[1]);
-		//printf("read %d from port %d\n", data[1], port);
 	}	
 	
-	
+	usleep(1000);
+
 
 	
 	
@@ -82,7 +87,7 @@ void write_all_IOs(_port_data port0Data, _port_data port1Data, _IOsDevice* devic
 	}
 
 	
-	usleep(100000);
+	usleep(1000);
 
 }
 
@@ -125,7 +130,7 @@ void set_bit(char value, char index, char* byte){
 }
 
 _bit read_bit(char index, char* byte){
-	
+
 	return (_bit)((*byte >> index) & 0x1);
 
 	

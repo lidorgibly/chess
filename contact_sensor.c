@@ -20,10 +20,10 @@ _IOsDevice device7;
 
 void init_contact_sensors(){
 
-	device4.address = 0x24;
-	device5.address = 0x25;
-	device6.address = 0x26;
-	device7.address = 0x27;
+	device4.address = I2C_DEVICE4_ADDRESS;
+	device5.address = I2C_DEVICE5_ADDRESS;
+	device6.address = I2C_DEVICE6_ADDRESS;
+	device7.address = I2C_DEVICE7_ADDRESS;
 
 
 }

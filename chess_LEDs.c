@@ -46,7 +46,6 @@ void LED_on_off(_coordinates coo, _LED_state on_off){
 	
 	
 	_port port;
-	_pin pin;
 	_bit bit;
 	
 	
