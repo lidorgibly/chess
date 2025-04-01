@@ -174,16 +174,18 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 	
 	_coordinates nextCoo;
 	
-
+	LED_on_off(originLocation, ON);
 	//up right movement
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 1;
 	
-	while ((is_in_board(nextCoo.x, nextCoo.y)) && (board[nextCoo.x][nextCoo.y]==None)){
+	while (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None)){
 		LED_on_off(nextCoo, ON);
 		nextCoo.x =  nextCoo.x + 1;
 		nextCoo.y =  nextCoo.y + 1;
 	}
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y + 1;
@@ -194,7 +196,8 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x - 1 ;
 		nextCoo.y =  nextCoo.y + 1;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//down right movement
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 1;
@@ -204,7 +207,8 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x + 1;
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//down left movement
 	
 	nextCoo.x =  originLocation.x - 1 ;
@@ -215,7 +219,8 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x - 1 ;
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	
 	
 }
@@ -227,8 +232,7 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 void show_rook_movement_LEDs(_coordinates originLocation){
 	
 	_coordinates nextCoo;
-
-
+	LED_on_off(originLocation, ON);
 	//up movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y + 1;
@@ -237,6 +241,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.y =  nextCoo.y + 1;
 	}
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
 	nextCoo.y =  originLocation.y;
@@ -245,7 +251,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.x =  nextCoo.x + 1;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//down movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y - 1;
@@ -254,7 +261,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 	//left movement
 	
 	nextCoo.x =  originLocation.x - 1 ;
@@ -264,7 +272,8 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.x =  nextCoo.x - 1 ;
 	}
-	
+	if (is_in_board(nextCoo.x, nextCoo.y))
+		LED_on_off(nextCoo, ON);
 }
 void show_queen_movement_LEDs(_coordinates originLocation){
 	show_rook_movement_LEDs(originLocation);
@@ -276,25 +285,26 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	_coordinates nextCoo;
 	
 
+	LED_on_off(originLocation, ON);
 
 	//up movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
 	nextCoo.y =  originLocation.y;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	//down movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	//left movement
@@ -302,7 +312,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 
 
@@ -310,20 +320,20 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	//down right movement
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	//down left movement
@@ -331,7 +341,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	
@@ -340,75 +350,89 @@ void show_king_movement_LEDs(_coordinates originLocation){
 
 void show_knight_movement_LEDs(_coordinates originLocation){
 	_coordinates nextCoo;
-	
+	LED_on_off(originLocation, ON);
+
 	nextCoo.x =  originLocation.x + 2;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 2;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y + 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y - 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
+	if (is_in_board(nextCoo.x, nextCoo.y))
 		LED_on_off(nextCoo, ON);
 }
 
 void show_top_pawn_movement_LEDs(_coordinates originLocation){
 	
 	_coordinates nextCoo;
+	LED_on_off(originLocation, ON);
 
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y - 1;
 	
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
 		LED_on_off(nextCoo, ON);
-
-	
-	
+	nextCoo.x =  originLocation.x + 1;
+	nextCoo.y =  originLocation.y - 1;
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+		LED_on_off(nextCoo, ON);
+	nextCoo.x =  originLocation.x - 1;
+	nextCoo.y =  originLocation.y - 1;
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+		LED_on_off(nextCoo, ON);
 }
 void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
 	_coordinates nextCoo;
-
+	LED_on_off(originLocation, ON);
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y + 1;
 	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]==None))
 		LED_on_off(nextCoo, ON);
-	
+	nextCoo.x =  originLocation.x + 1;
+	nextCoo.y =  originLocation.y + 1;
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+		LED_on_off(nextCoo, ON);
+	nextCoo.x =  originLocation.x - 1;
+	nextCoo.y =  originLocation.y + 1;
+	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+		LED_on_off(nextCoo, ON);
 }
 
 
