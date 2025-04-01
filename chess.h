@@ -37,7 +37,7 @@ char piece_type_to_color(_piece_type pieceType);
 
 
 void make_move(_coordinates origin, _coordinates destination);
-
+bool is_same_side(_piece_type pieceType1, _piece_type pieceType2);
 bool is_same_location(_coordinates c1, _coordinates c2);
 bool is_init_state();
 

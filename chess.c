@@ -92,11 +92,10 @@ void piece_up(_coordinates coo){
 	
 	LED_on_off(coo, OFF);
 
-	show_permitted_locations(coo);
 	print_board(board);
 	
 	if (firstUp.pieceType==None){
-		
+		show_permitted_locations(coo);
 		firstUp.pieceType = board[coo.x][coo.y];
 		firstUp.originLocation = coo;		
 		
@@ -184,7 +183,7 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x + 1;
 		nextCoo.y =  nextCoo.y + 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
@@ -196,7 +195,7 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x - 1 ;
 		nextCoo.y =  nextCoo.y + 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//down right movement
 	nextCoo.x =  originLocation.x + 1;
@@ -207,7 +206,7 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x + 1;
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//down left movement
 	
@@ -219,7 +218,7 @@ void show_bishop_movement_LEDs(_coordinates originLocation){
 		nextCoo.x =  nextCoo.x - 1 ;
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	
 	
@@ -241,7 +240,7 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.y =  nextCoo.y + 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
@@ -251,7 +250,7 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.x =  nextCoo.x + 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//down movement
 	nextCoo.x =  originLocation.x;
@@ -261,7 +260,7 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.y =  nextCoo.y - 1;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 	//left movement
 	
@@ -272,7 +271,7 @@ void show_rook_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 		nextCoo.x =  nextCoo.x - 1 ;
 	}
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y]))
 		LED_on_off(nextCoo, ON);
 }
 void show_queen_movement_LEDs(_coordinates originLocation){
@@ -291,20 +290,20 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	//right movement
 	nextCoo.x =  originLocation.x + 1 ;
 	nextCoo.y =  originLocation.y;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	//down movement
 	nextCoo.x =  originLocation.x;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	//left movement
@@ -312,7 +311,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) ||  !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 
 
@@ -320,20 +319,20 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	//up left movement
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	//down right movement
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	//down left movement
@@ -341,7 +340,7 @@ void show_king_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x - 1 ;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	
@@ -355,47 +354,47 @@ void show_knight_movement_LEDs(_coordinates originLocation){
 	nextCoo.x =  originLocation.x + 2;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 2;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y + 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 2;
 	nextCoo.y =  originLocation.y - 1;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y + 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y - 2;
 	
-	if (is_in_board(nextCoo.x, nextCoo.y))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] == None) || !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 }
 
@@ -411,11 +410,11 @@ void show_top_pawn_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y - 1;
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] != None) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y - 1;
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+	if (is_in_board(nextCoo.x, nextCoo.y) && ((board[nextCoo.x][nextCoo.y] != None) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 }
 void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
@@ -427,11 +426,11 @@ void show_bottom_pawn_movement_LEDs(_coordinates originLocation){
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x + 1;
 	nextCoo.y =  originLocation.y + 1;
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+	if (is_in_board(nextCoo.x, nextCoo.y)  && ((board[nextCoo.x][nextCoo.y] != None) &&  !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 	nextCoo.x =  originLocation.x - 1;
 	nextCoo.y =  originLocation.y + 1;
-	if (is_in_board(nextCoo.x, nextCoo.y) && (board[nextCoo.x][nextCoo.y]!=None))
+	if (is_in_board(nextCoo.x, nextCoo.y)  && ((board[nextCoo.x][nextCoo.y] != None) && !is_same_side(board[nextCoo.x][nextCoo.y], board[originLocation.x][originLocation.y])))
 		LED_on_off(nextCoo, ON);
 }
 
@@ -582,6 +581,25 @@ char piece_type_to_color(_piece_type pieceType){
 	
 
 }
+
+
+bool is_same_side(_piece_type pieceType1, _piece_type pieceType2)
+{	
+	if (pieceType1 == None || pieceType2 == None)
+		return false;
+	if ((pieceType1 >= Top_King) && (pieceType1 <= Top_Pawn)) 
+		if ((pieceType2 >= Top_King) && (pieceType2 <= Top_Pawn))
+			return true;
+		else
+			return false;
+	if ((pieceType1 >= Bottom_King) && (pieceType1 <= Bottom_Pawn)) 
+		if ((pieceType2 >= Bottom_King) && (pieceType2 <= Bottom_Pawn))
+				return true;
+		else
+			return false;
+}
+
+
 
 void print_board(_piece_type board[8][8]){
 	printf("\n      a       b       c       d       e       f       g       h\n\n");
