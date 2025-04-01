@@ -1,4 +1,4 @@
-#include "contact_sensor.h"
+#include "sensors.h"
 #ifdef LINUX
 #include "PCF8575_linux.h"
 #else 
@@ -18,7 +18,8 @@ _IOsDevice device7;
 
 
 
-void init_contact_sensors(){
+void init_contact_sensors()
+{
 
 	device4.address = I2C_DEVICE4_ADDRESS;
 	device5.address = I2C_DEVICE5_ADDRESS;
@@ -27,7 +28,6 @@ void init_contact_sensors(){
 
 
 }
-
 
 
 

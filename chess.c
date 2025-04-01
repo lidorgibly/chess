@@ -10,14 +10,9 @@
 _piece_type board[8][8];
 
 
-_piece lastEaten;
-_piece lastEat;
-
-
 
 _piece firstUp;
 _piece secondUp;
-_piece thirdUp;
 
 
 
@@ -67,7 +62,6 @@ void init_board(){
 
 	firstUp.pieceType = None;
 	secondUp.pieceType = None;
-	
 
 }
 
@@ -96,19 +90,15 @@ bool is_init_state(){
 
 void piece_up(_coordinates coo){
 	
-	
+	LED_on_off(coo, OFF);
+
 	show_permitted_locations(coo);
 	print_board(board);
 	
 	if (firstUp.pieceType==None){
 		
 		firstUp.pieceType = board[coo.x][coo.y];
-		firstUp.originLocation = coo;
-		
-		
-		
-		//show_permitted_locations(_coordinates);
-		
+		firstUp.originLocation = coo;		
 		
 	}else if(secondUp.pieceType==None){
 		
@@ -116,21 +106,10 @@ void piece_up(_coordinates coo){
 		secondUp.pieceType = board[coo.x][coo.y];
 		secondUp.originLocation = coo;
 
-	}else{
-		
-		thirdUp.pieceType = board[coo.x][coo.y];
-		thirdUp.originLocation = coo;
-		
 	}
 		
 	
-	
-	
-	//board[coo.x][coo.y] = None;
 
-	
-	
-	
 	
 	
 	
@@ -138,44 +117,34 @@ void piece_up(_coordinates coo){
 
 void piece_down(_coordinates coo){
 	
-	LED_off_all();
+	LED_on_off(coo, ON);
 
-	
-	if (firstUp.pieceType==None){	//maybe the players got up 2 pieces and got them down
-		
-		board[coo.x][coo.y] = lastEat.pieceType;
-		board[lastEaten.originLocation.x][lastEaten.originLocation.y] = lastEaten.pieceType;
-		
-		printf("firstUp None\n");
 
-		
-	}else if (secondUp.pieceType==None){			
+	if (secondUp.pieceType==None){			
 		
 		printf("secondUp None\n");
 		make_move(firstUp.originLocation, coo);
 		firstUp.pieceType = None;
+		LED_off_all();
 	
-	}else if (thirdUp.pieceType==None){		//maybe piece eated another piece
-			printf("thirdUp None\n");
+	}else {		//maybe piece eated another piece
+			//printf("thirdUp None\n");
 
 		if (is_same_location(coo, secondUp.originLocation)){		
 			
 														//first eat second
-			make_move(firstUp.originLocation, coo);
-			
-			
-			
-			lastEaten = secondUp;
-			lastEat = firstUp;
+			make_move(firstUp.originLocation, coo);		
+		
 		}else if (is_same_location(coo, firstUp.originLocation)){		
 			make_move(secondUp.originLocation, coo);		// second eat first
-			lastEaten = firstUp;
-			lastEat = secondUp;
+			
 
 		}
 		
 		firstUp.pieceType = None;
 		secondUp.pieceType = None;
+		LED_off_all();
+
 	}
 	
 	

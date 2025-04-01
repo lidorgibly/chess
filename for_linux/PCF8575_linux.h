@@ -17,14 +17,20 @@ typedef enum {ZERO, ONE} _bit;
 typedef enum {PORT0, PORT1} _port;
 typedef enum {PIN0, PIN1, PIN2, PIN3, PIN4, PIN5, PIN6, PIN7} _pin;
 typedef char _port_data;
-
 typedef struct IOsDevice{
 	int address;	
 } _IOsDevice;
 
+
+typedef struct IO_position{
+	_IOsDevice device;
+	_port port;
+	_pin pin;	
+} _IO_position;
+
 _bit read_bit(char index, char* byte);
 void set_bit(char value, char index, char* byte);
-_bit read_IO(_port port, _pin pin, _IOsDevice* device);	//input mode
+_bit read_IO(_IO_position io);	//input mode
 void write_all_IOs(_port_data port0Data, _port_data port1Data, _IOsDevice* device);	//output mode
 void write_IO(_port port, _pin pin, _bit value, _IOsDevice* device);	//output mode
 void read_all_IOs(char*, char*, _IOsDevice*);

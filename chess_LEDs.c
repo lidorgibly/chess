@@ -9,9 +9,6 @@
 
 
 
-_LED_state LED_Board[8][8];
-
-extern _piece_type board[8][8];
 
 
 _IOsDevice device0;

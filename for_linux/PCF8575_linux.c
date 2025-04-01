@@ -18,26 +18,26 @@
 
 //PORT 0 or 1
 //PIN 0 to 7
-_bit read_IO(_port port, _pin pin, _IOsDevice* device){		//input mode
+_bit read_IO(_IO_position io){		//input mode
 	
 	char data[2];
 	
-	set_i2c_slave_address(device->address);
+	set_i2c_slave_address(io.device.address);
 	
 	if (i2c_read(data, 2) == false) {
-		printf("I2C error address: %d\n", device->address);
+		printf("I2C error address: %d\n", io.device.address);
 
 	}
-	if (port == PORT0){
+	if (io.port == PORT0){
 				//printf("read %d from port %d\n", data[0], port);
 
-		return read_bit((char)pin, &data[0]);
+		return read_bit((char)io.pin, &data[0]);
 	}
 	
-	if (port == PORT1){
+	if (io.port == PORT1){
 				//printf("read %d from port %d\n", data[1], port);
 
-		return read_bit((char)pin, &data[1]);
+		return read_bit((char)io.pin, &data[1]);
 	}	
 	
 	usleep(1000);
